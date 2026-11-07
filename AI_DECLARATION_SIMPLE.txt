@@ -2,7 +2,6 @@
 AI USAGE DECLARATION
 ============================================================
 Name: Suvro Singha
-Student ID: 22101341
 Assignment: CSE 391 Assignment 3 - PHP and mySQL Project
 Date: November 07, 2026
 ------------------------------------------------------------
