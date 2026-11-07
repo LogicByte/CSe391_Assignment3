@@ -1,0 +1,170 @@
+============================================================
+AI USAGE DECLARATION
+============================================================
+Name: Suvro Singha
+Student ID: 22101341
+Assignment: CSE 391 Assignment 3 - PHP and mySQL Project
+Date: November 07, 2026
+------------------------------------------------------------
+1. AI TOOLS USED (check all that apply)
+------------------------------------------------------------
+[ ] None
+[x] ChatGPT 
+[x] GitHub Copilot
+[ ] Google Gemini
+[ ] Claude
+[ ] Cursor
+[ ] Other: ________________
+------------------------------------------------------------
+2. PURPOSE OF AI USE (check all that apply)
+------------------------------------------------------------
+[x] Learning/understanding concepts
+[x] Debugging my code
+[x] Generating code snippets
+[ ] Writing text content
+[x] Design/styling ideas
+[ ] Image generation
+[ ] Other: ________________
+------------------------------------------------------------
+3. DESCRIPTION OF AI USE
+------------------------------------------------------------
+Briefly describe what you used AI for and how:
+I used AI as an interactive coding guide to architect, generate, and debug the full-stack PHP/MySQL application. I provided high-level architectural and business logic requirements (e.g., mechanic capacity limits, duplicate booking checks, dynamic AJAX availability), and the AI generated the specific SQL schemas, PHP PDO backend logic, and frontend JavaScript/CSS. I also used it to debug AJAX fetch errors and refine the UI/UX to ensure a polished, non-generic look.
+------------------------------------------------------------
+4. AI-ASSISTED SECTIONS
+------------------------------------------------------------
+promts
+
+File: database.sql & config.php 
+Section: Database Schema & Connection
+Prompt:
+1.Create a file named database.sql. Write a complete MySQL script to set up a car workshop appointment database. 
+
+    Create a database named car_workshop_db.
+    Create a mechanics table with columns: id (INT, Primary Key, Auto Increment), name (VARCHAR), and specialty (VARCHAR). Insert exactly 5 dummy mechanics into this table (e.g., John Smith - Engine, Mike Johnson - Brakes, etc.).
+    Create an appointments table with columns: id (INT, Primary Key), client_name (VARCHAR), address (TEXT), phone (VARCHAR), license_no (VARCHAR), engine_no (VARCHAR), appointment_date (DATE), mechanic_id (INT, Foreign Key referencing mechanics.id), and created_at (TIMESTAMP). 
+    Ensure all tables use InnoDB and utf8mb4 charset.
+
+
+
+
+2.Create a file named config.php. Write a secure PHP database connection script using PDO. 
+
+    Connect to the car_workshop_db database on localhost with username root and an empty password (standard XAMPP setup).
+    Set the PDO error mode to exception.
+    Set the default fetch mode to associative.
+    Add a try-catch block to handle connection errors gracefully. Do not output raw database errors to the screen in a production environment.
+
+File: style.css 
+Section: UI/UX Foundation
+Prompt: Create a file named style.css. I need a modern, sleek, automotive-themed CSS stylesheet that does NOT look like a generic AI-generated Bootstrap template. 
+
+    Use a color palette: Deep Slate Gray (#1e293b) for backgrounds, Crisp White (#f8fafc) for cards, and a Racing Crimson (#dc2626) for primary accents/buttons.
+    Use the 'Inter' or 'Segoe UI' font family.
+    Create a .btn-primary class with a smooth 0.3s ease-in-out transition, a subtle box-shadow on hover, and a slight upward transform (translateY(-2px)) on hover.
+    Create a .card class with a subtle border-radius (12px), a very light shadow, and a backdrop-filter blur effect if applicable.
+    Add a custom styled scrollbar.
+    Ensure all input fields have a smooth focus state (border color changes to Racing Crimson, subtle ring effect).
+    Add a CSS keyframe animation named fadeInUp for elements entering the screen, and apply it to a .animate-in class."
+
+File: index.php 
+Section: User Interface & Dynamic Mechanic List
+Prompt: Create a file named index.php. This is the main user-facing page for a car workshop appointment system. 
+
+    Include config.php at the top.
+    Write the HTML structure. Use a clean, modern layout. Include a header with the title 'AutoCare Workshop - Book Your Mechanic'. 
+    Create a form inside a .card container with the .animate-in class. The form must have inputs for: Client Name (text), Address (textarea), Phone (tel), Car License No (text), Car Engine No (text), and Appointment Date (date, min set to today's date).
+    Crucial: Create a dropdown (<select>) for 'Select Mechanic'. Query the mechanics table. For each mechanic, count how many appointments they already have for today's date (or the selected date, but keep it simple for the default load: just show their total daily capacity). 
+    The dropdown options should display the mechanic's name and their available slots like this: 'John Smith (Engine) - 3 slots available'. If a mechanic has 0 slots available, disable that <option> and append '(FULL)' to the text.
+    Add a submit button with the class .btn-primary. 
+    Link style.css and script.js. Ensure the HTML is semantic and uses the custom CSS classes we defined earlier to maintain the non-generic, polished look
+
+File: process_booking.php 
+Section: Backend Logic & Database Insertion
+Prompt: Create a file named process_booking.php. This handles the POST request from index.php.
+
+    Include config.php.
+    Retrieve and sanitize all POST variables (name, address, phone, license, engine, date, mechanic_id).
+    Validation 1 (Duplicate Check): Query the appointments table to check if the phone number OR license_no already has an appointment on the exact same appointment_date. If yes, redirect back to index.php with an error message in the URL (e.g., ?error=duplicate).
+    Validation 2 (Capacity Check): Count how many appointments the selected mechanic_id has for the selected appointment_date. If the count is >= 4, redirect back with ?error=full.
+    Insertion: If both checks pass, use a PDO prepared statement to INSERT the data into the appointments table. 
+    If successful, redirect to index.php?success=booked. If any DB error occurs, redirect with ?error=db.
+    Ensure all database interactions use prepared statements to prevent SQL injection
+
+File: script.js 
+Section: Frontend Validation
+Prompt: Create a file named script.js to handle frontend form validation before submission. This is critical for grading.
+
+    Select the form in index.php and add a 'submit' event listener that prevents default submission if validation fails.
+    Validate the following rules (show a small, styled error message below the specific input if it fails):
+        Name: Cannot be empty, min 3 characters.
+        Phone: Must be exactly 10 to 15 digits (numbers only).
+        Car Engine No: Must contain ONLY numbers.
+        Car License No: Cannot be empty, alphanumeric.
+        Appointment Date: Cannot be empty, and must be today or in the future.
+        Mechanic: Must not be the default 'Select a Mechanic' option.
+    Add a smooth CSS class (like .input-error with a red border) to invalid fields, and remove it when the user starts typing.
+    If all validations pass, allow the form to submit.
+
+File: admin_login.php & admin_dashboard.php 
+Section: Admin Authentication & Dashboard
+Prompt: "Create two files: admin_login.php and admin_dashboard.php... In admin_login.php, create a simple, clean login form... Hardcode the credentials... In admin_dashboard.php, check if the session is active... Write a SQL JOIN query to fetch all appointments..."
+
+File: admin_edit.php 
+Section: Admin Edit Logic
+Prompt: "Create a file named admin_edit.php. This page allows the admin to change an appointment's date and mechanic... For the Mechanic dropdown, query the mechanics table. Just like the user panel, show their available slots..."
+
+File: api_mechanics.php 
+Section: AJAX API Endpoint for Real-time Availability
+Prompt: "Rewrite the file api_mechanics.php completely. It needs to return a clean JSON list of mechanics and their available slots for a specific date... Use a single, efficient SQL query with a LEFT JOIN..."
+
+File: script.js (Updated) 
+Section: Dynamic Dropdown & Error Handling
+Prompt: "Update the loadMechanics function in script.js to fix the 'Mechanics are temporarily unavailable' error and ensure slot counts update correctly... Handle 'Full' Mechanics Gracefully: If the API returns successfully, but a mechanic has slots === 0... change its text to say Name (Specialty) - (FULL)."
+
+
+In admin_login.php, create a simple, clean login form (using our existing style.css) that asks for a username and password. Hardcode the credentials for this assignment as username: admin, password: admin123. On successful login, start a PHP session $_SESSION['admin_logged_in'] = true and redirect to admin_dashboard.php.
+In admin_dashboard.php, check if the session is active. If not, redirect to admin_login.php. Add a 'Logout' button that destroys the session.
+Include config.php. Write a SQL JOIN query to fetch all appointments along with the mechanic's name from the mechanics table.
+Display this data in a clean, responsive HTML table with the following columns: Client Name, Phone, Car License No (Registration), Appointment Date, Mechanic Name, and an 'Edit' column containing a button linking to admin_edit.php?id=[appointment_id].
+Style the table using our existing CSS to match the polished, non-generic look (e.g., striped rows, hover effects on rows)
+
+
+Create a file named admin_edit.php. This page allows the admin to change an appointment's date and mechanic.
+
+    Include config.php and check the admin session.
+    Get the id from the URL $_GET['id']. Fetch the current appointment details from the database to pre-fill a form.
+    Create a form with: Appointment Date (date input) and Mechanic (dropdown). 
+    For the Mechanic dropdown, query the mechanics table. Just like the user panel, show their available slots for the currently selected date. Disable options with 0 slots.
+    On form POST, validate that the new mechanic has < 4 appointments on the new date. If valid, use a PDO prepared statement to UPDATE the appointment_date and mechanic_id for this specific id.
+    Redirect back to admin_dashboard.php with a success message. Handle errors gracefully.
+
+    Open index.php. At the very bottom of the HTML body, just before the closing </body> tag, add a clean, centered footer. 
+
+        The footer should have a subtle top border and slightly smaller text.
+        Include a link that says 'Admin Login' pointing to admin_login.php. 
+        Style it using our existing CSS classes so it looks professional and matches the sleek, non-generic automotive theme (e.g., use a muted gray text color that turns Racing Crimson on hover). 
+        Also, add a small copyright text like '© 2026 AutoCare Workshop' next to it."
+
+Create a new file named api_mechanics.php. 
+
+    Include config.php.
+    Get the date from the URL using $_GET['date']. If it's empty, default to today's date (date('Y-m-d')).
+    Query the mechanics table to get all mechanics.
+    For each mechanic, query the appointments table to count how many appointments they have for that specific date.
+    Calculate available_slots = 4 - count. (Do not let it go below 0).
+    Return the data as a JSON array using json_encode(). The JSON should look like this: [{"id": 1, "name": "John Smith", "specialty": "Engine", "slots": 2}, ...]. Set the header to Content-Type: application/json.
+
+
+------------------------------------------------------------
+5. DECLARATION
+------------------------------------------------------------
+I declare that:
+- This disclosure is complete and accurate
+- I understand all code in my submission
+- I can explain and modify my work if asked
+- I take full responsibility for my submission
+
+Signature: _Suvro________________
+Date: _______7 nov ____________________
+============================================================

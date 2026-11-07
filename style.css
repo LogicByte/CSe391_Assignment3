@@ -1,0 +1,559 @@
+:root {
+    color-scheme: light;
+    --slate: #1e293b;
+    --white: #f8fafc;
+    --crimson: #dc2626;
+    --ink: #172033;
+    --muted: #64748b;
+    --line: #cbd5e1;
+    --surface: rgba(248, 250, 252, 0.94);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: var(--slate);
+    color: var(--white);
+    font-family: Inter, "Segoe UI", sans-serif;
+}
+
+body::before {
+    position: fixed;
+    z-index: -1;
+    inset: 0;
+    background:
+        radial-gradient(ellipse at 82% 8%, rgba(220, 38, 38, 0.14), transparent 34%),
+        linear-gradient(135deg, rgba(15, 23, 42, 0.2), transparent 58%);
+    content: "";
+    pointer-events: none;
+}
+
+::selection {
+    background: var(--crimson);
+    color: var(--white);
+}
+
+.site-header {
+    display: flex;
+    min-height: 76px;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(248, 250, 252, 0.1);
+    padding: 0 clamp(1.25rem, 5vw, 5rem);
+}
+
+.brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--white);
+    font-size: 0.95rem;
+    font-weight: 750;
+    letter-spacing: 0.015em;
+    text-decoration: none;
+}
+
+.brand-mark {
+    display: grid;
+    width: 34px;
+    height: 34px;
+    place-items: center;
+    border-radius: 6px;
+    background: var(--crimson);
+    font-size: 1rem;
+    font-style: italic;
+}
+
+.brand-light {
+    color: #cbd5e1;
+    font-weight: 450;
+}
+
+.header-note,
+.page-footer {
+    color: #94a3b8;
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+}
+
+.site-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.65rem;
+    margin: 0 auto;
+    border-top: 1px solid rgba(248, 250, 252, 0.1);
+    padding: 1.15rem 1rem;
+}
+
+.site-footer a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.site-footer a:hover,
+.site-footer a:focus-visible {
+    color: var(--crimson);
+}
+
+.footer-divider {
+    color: #64748b;
+}
+
+.booking-layout {
+    width: min(100% - 2rem, 820px);
+    margin: 0 auto;
+    padding: clamp(2.5rem, 7vw, 5.5rem) 0 2rem;
+}
+
+.intro {
+    max-width: 700px;
+    margin: 0 auto 2rem;
+}
+
+.eyebrow {
+    margin: 0 0 0.65rem;
+    color: var(--crimson);
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.17em;
+    text-transform: uppercase;
+}
+
+.intro h1 {
+    max-width: 680px;
+    margin: 0;
+    font-size: clamp(2rem, 5vw, 3.35rem);
+    font-weight: 720;
+    letter-spacing: -0.045em;
+    line-height: 1.08;
+}
+
+.intro-copy {
+    max-width: 540px;
+    margin: 1rem 0 0;
+    color: #cbd5e1;
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #111827;
+}
+
+::-webkit-scrollbar-thumb {
+    border: 2px solid #111827;
+    border-radius: 999px;
+    background: #64748b;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--crimson);
+}
+
+* {
+    scrollbar-color: #64748b #111827;
+    scrollbar-width: thin;
+}
+
+.card {
+    overflow: hidden;
+    border: 1px solid rgba(248, 250, 252, 0.12);
+    border-radius: 12px;
+    background: var(--surface);
+    box-shadow: 0 8px 24px rgba(2, 6, 23, 0.12);
+    color: var(--ink);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+}
+
+.booking-card {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: clamp(1.25rem, 4vw, 2.25rem);
+}
+
+.card-heading {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 1.8rem;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 1.1rem;
+}
+
+.card-heading .eyebrow {
+    margin-bottom: 0.4rem;
+}
+
+.card-heading h2 {
+    margin: 0;
+    font-size: 1.35rem;
+    letter-spacing: -0.025em;
+}
+
+.card-index {
+    color: #94a3b8;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.15rem 1rem;
+}
+
+.field {
+    min-width: 0;
+}
+
+.field-full {
+    grid-column: 1 / -1;
+}
+
+.field label {
+    display: block;
+    margin-bottom: 0.45rem;
+    color: #334155;
+    font-size: 0.82rem;
+    font-weight: 650;
+}
+
+.field textarea {
+    resize: vertical;
+}
+
+.field select:disabled,
+.btn-primary:disabled {
+    cursor: not-allowed;
+    opacity: 0.58;
+}
+
+.field-hint {
+    display: block;
+    margin-top: 0.45rem;
+    color: var(--muted);
+    font-size: 0.72rem;
+    line-height: 1.5;
+}
+
+.form-alert {
+    margin: 0 0 1.25rem;
+    border-left: 3px solid var(--crimson);
+    padding: 0.75rem 0.9rem;
+    background: #fee2e2;
+    color: #7f1d1d;
+    font-size: 0.88rem;
+}
+
+.form-success {
+    margin: 0 0 1.25rem;
+    border-left: 3px solid #16a34a;
+    padding: 0.75rem 0.9rem;
+    background: #dcfce7;
+    color: #166534;
+    font-size: 0.88rem;
+}
+
+.form-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 1.6rem;
+    border-top: 1px solid #e2e8f0;
+    padding-top: 1.2rem;
+}
+
+.form-note {
+    max-width: 250px;
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.75rem;
+    line-height: 1.5;
+}
+
+.page-footer {
+    margin-top: 1.6rem;
+    text-align: center;
+}
+
+.btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border: 1px solid var(--crimson);
+    border-radius: 6px;
+    padding: 0.7rem 1.1rem;
+    background: var(--crimson);
+    color: var(--white);
+    font: inherit;
+    font-weight: 650;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out,
+        box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    border-color: #b91c1c;
+    background: #b91c1c;
+    box-shadow: 0 8px 18px rgba(220, 38, 38, 0.24);
+}
+
+.btn-primary:focus-visible {
+    outline: 3px solid rgba(220, 38, 38, 0.35);
+    outline-offset: 3px;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 0.7rem 0.8rem;
+    background: var(--white);
+    color: var(--ink);
+    font: inherit;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: var(--crimson);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.16);
+}
+
+.input-error,
+.input-error:focus {
+    border-color: var(--crimson);
+    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.12);
+}
+
+.field-error {
+    display: block;
+    margin-top: 0.4rem;
+    color: #b91c1c;
+    font-size: 0.75rem;
+    line-height: 1.4;
+}
+
+.admin-login-card {
+    max-width: 500px;
+}
+
+.admin-layout {
+    width: min(100% - 2rem, 1240px);
+    margin: 0 auto;
+    padding: clamp(2.5rem, 6vw, 4.5rem) 0 2rem;
+}
+
+.admin-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1.5rem;
+    margin-bottom: 1.75rem;
+}
+
+.admin-heading h1 {
+    margin: 0;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 720;
+    letter-spacing: -0.045em;
+    line-height: 1.08;
+}
+
+.admin-heading .intro-copy {
+    margin-top: 0.65rem;
+}
+
+.admin-count {
+    flex: 0 0 auto;
+    border: 1px solid rgba(248, 250, 252, 0.14);
+    border-radius: 999px;
+    padding: 0.5rem 0.8rem;
+    background: rgba(248, 250, 252, 0.08);
+    color: #cbd5e1;
+    font-size: 0.78rem;
+    font-weight: 650;
+}
+
+.admin-table-card {
+    padding: 0.35rem;
+}
+
+.table-scroll {
+    overflow-x: auto;
+}
+
+.appointments-table {
+    width: 100%;
+    min-width: 800px;
+    border-collapse: separate;
+    border-spacing: 0;
+    color: var(--ink);
+    text-align: left;
+}
+
+.appointments-table th,
+.appointments-table td {
+    border-bottom: 1px solid #e2e8f0;
+    padding: 1rem 1.1rem;
+}
+
+.appointments-table th {
+    background: #f1f5f9;
+    color: #475569;
+    font-size: 0.7rem;
+    font-weight: 750;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.appointments-table th:first-child {
+    border-top-left-radius: 8px;
+}
+
+.appointments-table th:last-child {
+    border-top-right-radius: 8px;
+}
+
+.appointments-table td {
+    font-size: 0.88rem;
+}
+
+.appointments-table tbody tr:nth-child(even) {
+    background: #f8fafc;
+}
+
+.appointments-table tbody tr {
+    transition: background-color 0.18s ease;
+}
+
+.appointments-table tbody tr:hover {
+    background: #fee2e2;
+}
+
+.appointments-table tbody tr:last-child td {
+    border-bottom: 0;
+}
+
+.appointments-table .table-empty {
+    padding: 2rem 1rem;
+    color: var(--muted);
+    text-align: center;
+}
+
+.btn-secondary {
+    border-color: rgba(248, 250, 252, 0.25);
+    background: transparent;
+}
+
+.btn-secondary:hover {
+    border-color: rgba(248, 250, 252, 0.5);
+    background: rgba(248, 250, 252, 0.1);
+    box-shadow: none;
+}
+
+.btn-edit {
+    padding: 0.45rem 0.75rem;
+    font-size: 0.78rem;
+}
+
+.visually-hidden {
+    position: absolute;
+    overflow: hidden;
+    width: 1px;
+    height: 1px;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    clip-path: inset(50%);
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(14px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-in {
+    animation: fadeInUp 0.5s ease-out both;
+}
+
+@media (max-width: 560px) {
+    .header-note {
+        display: none;
+    }
+
+    .booking-layout {
+        width: min(100% - 1.25rem, 820px);
+        padding-top: 2.5rem;
+    }
+
+    .admin-layout {
+        width: min(100% - 1.25rem, 1240px);
+        padding-top: 2.5rem;
+    }
+
+    .admin-heading {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 0.85rem;
+    }
+
+    .admin-table-card {
+        padding: 0.2rem;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .field-full {
+        grid-column: auto;
+    }
+
+    .form-footer {
+        align-items: stretch;
+        flex-direction: column-reverse;
+    }
+
+    .form-note {
+        max-width: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
